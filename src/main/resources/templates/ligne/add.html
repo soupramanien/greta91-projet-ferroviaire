@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="www.thymeleaf.org">
+<head th:insert="~{ fragments/template :: header }"></head>
+
+<body>
+	<h1 th:text="${titrePage}">Ajouter une ligne :</h1>
+	
+	<!-- formulaire -->
+	<p th:if="${error != null}" th:text="${error}">erreur</p>
+	<form action="#" th:action="@{/ligne/add}" 
+						th:object="${ligne}" 
+						method="post">
+		<input type="text" th:field="*{nom}" th:errorclass="errorField">
+		<p th:if="${#fields.hasErrors('nom')}" th:errors="*{nom}">errors</p>
+		
+		
+		<input type="submit" value="Ajouter">
+	</form>
+	<footer th:insert="~{ fragments/template :: footer }"></footer>
+</body>
+</html>

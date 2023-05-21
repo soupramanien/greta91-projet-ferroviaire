@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="www.thymeleaf.org">
+<meta charset="UTF-8">
+<title th:text="${titrePage}"></title>
+</head>
+<body>
+	<h1 th:text="${titrePage}">Liste des dessertes :</h1>
+	<table>
+    <thead>
+        <tr>
+            <th> Ligne </th>
+            <th> Gare </th>
+            <th> Rang </th>
+        </tr>
+    </thead>
+    <tbody>
+	<tr th:if="${dessertes.empty}">
+            <td colspan="2"> Aucune desserte n'est disponible </td>
+        </tr>
+        <tr th:each="desserte : ${dessertes}">
+            <td><span th:text="${desserte.ligne.nom}"> Ligne </span></td>
+            <td><span th:text="${desserte.gare.nom}"> Gare </span></td>
+            <td><span th:text="${desserte.rang}"> Rang </span></td>
+        </tr>
+    </tbody>
+</table>
+</body>
+</html>

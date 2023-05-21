@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="www.thymeleaf.org">
+<head th:insert="~{ fragments/template :: header }"></head>
+
+<body>
+	<h1 th:text="${titrePage}">Modifier une ligne :</h1>
+	<p>Ligne <span th:text="${ligne.nom}"></span></p>
+	<h2>Liste des dessertes</h2>
+	<ul>
+        <li th:each="desserte : ${ligne.dessertes}"><span th:text="${desserte.gare.nom +'-'+ desserte.rang}"></span></li>
+    </ul>
+	<!-- formulaire -->
+	<h2>Ajouter une desserte</h2>
+	<form action="#" th:action="@{'/ligne/update/'+${ligne.id}+'/desserte/add'}" method="post">
+		<select name="gareId" >
+			<option 
+					th:each="gare : ${gares}" 
+					th:text="${gare.nom}"
+					th:value="${gare.id}">
+					Gare
+			</option>
+		</select>
+		<input type="text" name="rang">
+		<input type="submit" value="Ajouter">
+	</form>
+	<footer th:insert="~{ fragments/template :: footer }"></footer>
+</body>
+</html>

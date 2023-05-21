@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="www.thymeleaf.org">
+<head th:insert="~{ fragments/template :: header }"></head>
+
+<body>
+	<h1 th:text="${titrePage}">Ajouter une desserte :</h1>
+	
+	<!-- formulaire -->
+	<p th:if="${error != null}" th:text="${error}">erreur</p>
+	<form action="#" th:action="@{/desserte/add}" 
+						th:object="${desserte}" 
+						method="post">
+		<input type="text" th:field="*{rang}" th:errorclass="errorField">
+		<p th:if="${#fields.hasErrors('rang')}" th:errors="*{rang}">errors</p>
+		
+		
+		<select th:field="*{ligne}" >
+			<option 
+					th:each="ligne : ${lignes}" 
+					th:text="${ligne.nom}"
+					th:value="${ligne.id}">
+					Ligne
+			</option>
+		</select>
+		<select th:field="*{gare}" >
+			<option 
+					th:each="gare : ${gares}" 
+					th:text="${gare.nom}"
+					th:value="${gare.id}">
+					Gare
+			</option>
+		</select>
+		
+		<input type="submit" value="Ajouter">
+	</form>
+	<footer th:insert="~{ fragments/template :: footer }"></footer>
+</body>
+</html>
